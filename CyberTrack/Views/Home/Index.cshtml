@@ -177,3 +177,23 @@
         <button class="btn-cookie-a" onclick="closeBanner()">Accepter tout</button>
     </div>
 </div> 
+<script>
+    function closeBanner() {
+        const b = document.getElementById('cookieBanner');
+        if (b) {
+            b.style.transition = 'transform .4s ease';
+            b.style.transform = 'translateY(110%)';
+            setTimeout(() => b.remove(), 420);
+        }
+    }
+
+    // Gestion du bouton accepter avec appel AJAX
+    document.querySelector('.btn-cookie-a')?.addEventListener('click', function() {
+        fetch('@Url.Action("AcceptCookies", "Home")', { method: 'POST' })
+            .then(() => closeBanner());
+    });
+
+    document.querySelector('.btn-cookie-r')?.addEventListener('click', function() {
+        closeBanner();
+    });
+</script>

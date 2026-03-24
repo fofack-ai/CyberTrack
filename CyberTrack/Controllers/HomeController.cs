@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,21 +8,31 @@ namespace CyberTrack.Controllers
     {
         public ActionResult Index()
         {
+            // Vérifier si le cookie existe
+            if (Request.Cookies["AcceptCookies"] == null)
+            {
+                ViewBag.ShowCookieBanner = true;
+            }
+
+            // Données statiques pour l'instant (seront dynamiques plus tard)
+            ViewBag.TotalSignalements = 4821;
+            ViewBag.TauxResolution = 92;
+            ViewBag.CouvertureNationale = 10;
+
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public JsonResult AcceptCookies()
         {
-            ViewBag.Message = "Your application description page.";
+            var cookie = new HttpCookie("AcceptCookies")
+            {
+                Value = "true",
+                Expires = DateTime.Now.AddDays(30)
+            };
+            Response.Cookies.Add(cookie);
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return Json(new { success = true });
         }
     }
 }
