@@ -1,0 +1,199 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Accueil - Plateforme Nationale de Signalement";
+}
+
+<nav>
+    <a href="@Url.Action("Index", "Home")" class="nav-logo">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+            <span class="logo-name">CyberTrack</span>
+            <span class="logo-sub">Cameroun</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="@Url.Action("Index", "Home")">Accueil</a></li>
+        <li><a href="#comment">Comment ça marche</a></li>
+        <li><a href="#categories">Catégories</a></li>
+        <li><a href="#">À propos</a></li>
+    </ul>
+    <div class="nav-cta">
+        <a href="@Url.Action("Login", "Account")" class="btn-outline">Connexion</a>
+        <a href="@Url.Action("Create", "Signalement")" class="btn-primary">Faire un signalement</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="badge-dot"></span>Plateforme officielle — Cameroun</div>
+            <h1>Signalez.<br><span>Protégez.</span><br>Agissez.</h1>
+            <p class="hero-sub">La plateforme nationale de signalement des contenus illicites, fraudes et abus en ligne. Ensemble, construisons un espace numérique sûr pour tous les Camerounais.</p>
+            <div class="hero-actions">
+                <a href="@Url.Action("Create", "Signalement")" class="btn-hero"><span>🚨</span> Faire un signalement</a>
+                <a href="#comment" class="btn-hero-ghost"><span>▶</span> Comment ça marche</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><span class="stat-num">4<span>,821</span></span><span class="stat-label">Signalements traités</span></div>
+                <div class="stat-item"><span class="stat-num">92<span>%</span></span><span class="stat-label">Taux de résolution</span></div>
+                <div class="stat-item"><span class="stat-num">10<span> rég.</span></span><span class="stat-label">Couverture nationale</span></div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card-main">
+                <div class="card-header-row">
+                    <span class="card-tag red">🔴 Fraude</span>
+                    <span class="card-id">#SGN-2025-0392</span>
+                </div>
+                <div class="card-title">Site de faux emplois à Douala</div>
+                <div class="card-desc">Faux recrutement promettant des emplois au Canada moyennant paiement de frais illégaux…</div>
+                <div class="card-meta">
+                    <span class="meta-item">📍 Douala, Littoral</span>
+                    <span class="meta-item">📅 Il y a 2h</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div style="display:flex;justify-content:space-between;margin-top:6px;">
+                    <span style="font-size:11px;color:var(--gray)">En cours de traitement</span>
+                    <span style="font-size:11px;color:var(--green);font-weight:600">65%</span>
+                </div>
+            </div>
+            <div class="hero-card-float float-1">
+                <div class="float-inner">
+                    <div class="float-icon g">✅</div>
+                    <div class="float-info"><div class="f-title">Signalement résolu</div><div class="f-sub">#SGN-2025-0381 · Yaoundé</div></div>
+                </div>
+            </div>
+            <div class="hero-card-float float-2">
+                <div class="float-inner">
+                    <div class="float-icon r">🔔</div>
+                    <div class="float-info"><div class="f-title">+3 nouveaux signalements</div><div class="f-sub">Dernière heure · Toutes régions</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="categories">
+    <div class="section-inner">
+        <div class="section-label">🗂 Catégories</div>
+        <h2 class="section-title">Que souhaitez-vous signaler ?</h2>
+        <p class="section-sub">Choisissez la catégorie correspondant à votre signalement pour un traitement rapide et efficace.</p>
+        <div class="cat-grid">
+            <div class="cat-card"><span class="cat-icon">💰</span><div class="cat-name">Fraude &amp; Arnaque</div><div class="cat-count"><strong>1 248</strong> signalements</div></div>
+            <div class="cat-card"><span class="cat-icon">🔒</span><div class="cat-name">Cybercriminalité</div><div class="cat-count"><strong>876</strong> signalements</div></div>
+            <div class="cat-card"><span class="cat-icon">⚖️</span><div class="cat-name">Abus administratifs</div><div class="cat-count"><strong>534</strong> signalements</div></div>
+            <div class="cat-card"><span class="cat-icon">📰</span><div class="cat-name">Désinformation</div><div class="cat-count"><strong>712</strong> signalements</div></div>
+            <div class="cat-card"><span class="cat-icon">🧒</span><div class="cat-name">Contenu préjudiciable</div><div class="cat-count"><strong>329</strong> signalements</div></div>
+            <div class="cat-card"><span class="cat-icon">📱</span><div class="cat-name">Mobile Money Fraude</div><div class="cat-count"><strong>1 122</strong> signalements</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="how-section" id="comment">
+    <div class="section-inner">
+        <div class="section-label">🔄 Processus</div>
+        <h2 class="section-title">Comment fonctionne CyberTrack ?</h2>
+        <p class="section-sub">Un processus simple et transparent pour chaque signalement effectué sur notre plateforme.</p>
+        <div class="steps-grid">
+            <div class="step-card"><div class="step-num">1</div><div class="step-title">Soumettez</div><div class="step-desc">Remplissez le formulaire en décrivant le problème avec preuves à l'appui.</div></div>
+            <div class="step-card"><div class="step-num">2</div><div class="step-title">Recevez votre ticket</div><div class="step-desc">Un numéro de ticket unique vous est attribué pour suivre votre dossier.</div></div>
+            <div class="step-card"><div class="step-num">3</div><div class="step-title">Analyse</div><div class="step-desc">Notre équipe examine votre signalement et le transmet aux autorités compétentes.</div></div>
+            <div class="step-card"><div class="step-num">4</div><div class="step-title">Résolution</div><div class="step-desc">Vous êtes notifié de l'action menée par e-mail ou sur votre espace personnel.</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="signals-section">
+    <div class="section-inner">
+        <div class="section-label">📡 En direct</div>
+        <h2 class="section-title">Signalements récents</h2>
+        <p class="section-sub">Transparence totale sur les signalements traités par nos équipes à travers le pays.</p>
+        <div class="signals-grid">
+            <div class="signal-card">
+                <div class="signal-top"><span class="signal-cat fraude">💰 Fraude</span><div class="signal-status"></div></div>
+                <div class="signal-title">Faux site de transfert Mobile Money</div>
+                <div class="signal-preview">Imitation du site officiel Orange Money avec collecte frauduleuse de codes PIN…</div>
+                <div class="signal-footer"><span class="signal-region">📍 Yaoundé, Centre</span><span class="signal-date">14 jan. 2025</span></div>
+            </div>
+            <div class="signal-card">
+                <div class="signal-top"><span class="signal-cat cyber">🔒 Cyber</span><div class="signal-status pending"></div></div>
+                <div class="signal-title">Hameçonnage bancaire — UBA Cameroun</div>
+                <div class="signal-preview">Email frauduleux usurpant l'identité d'UBA demandant une mise à jour bancaire urgente…</div>
+                <div class="signal-footer"><span class="signal-region">📍 Douala, Littoral</span><span class="signal-date">13 jan. 2025</span></div>
+            </div>
+            <div class="signal-card">
+                <div class="signal-top"><span class="signal-cat admin">⚖️ Administratif</span><div class="signal-status"></div></div>
+                <div class="signal-title">Faux agents DGSN — Bafoussam</div>
+                <div class="signal-preview">Individus se faisant passer pour des agents de sécurité pour extorquer des citoyens…</div>
+                <div class="signal-footer"><span class="signal-region">📍 Bafoussam, Ouest</span><span class="signal-date">12 jan. 2025</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="trust-band">
+    <div class="trust-inner">
+        <div class="trust-text"><h2>Opéré sous l'autorité nationale</h2><p>CyberTrack travaille en partenariat avec les institutions officielles du Cameroun.</p></div>
+        <div class="trust-logos">
+            <div class="trust-logo-item">🏛 MINPOSTEL</div>
+            <div class="trust-logo-item">🔐 ART Cameroun</div>
+            <div class="trust-logo-item">👮 DGSN</div>
+            <div class="trust-logo-item">⚖️ ANTIC</div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                    <div class="logo-mark">C</div>
+                    <div class="logo-text"><span class="logo-name">CyberTrack</span><span class="logo-sub" style="color:rgba(255,255,255,.4)">Cameroun</span></div>
+                </div>
+                <p>Plateforme nationale de signalement des contenus illicites et abus numériques au Cameroun. Construisons ensemble un espace numérique plus sûr.</p>
+            </div>
+            <div class="footer-col"><h4>Signalement</h4><ul><li><a href="@Url.Action("Create", "Signalement")">Faire un signalement</a></li><li><a href="#">Suivre mon ticket</a></li><li><a href="#">Catégories</a></li><li><a href="#">Guide</a></li></ul></div>
+            <div class="footer-col"><h4>Compte</h4><ul><li><a href="@Url.Action("Login", "Account")">Connexion</a></li><li><a href="@Url.Action("Register", "Account")">Inscription</a></li><li><a href="@Url.Action("Dashboard", "Admin")">Tableau de bord</a></li><li><a href="#">Mon profil</a></li></ul></div>
+            <div class="footer-col"><h4>Informations</h4><ul><li><a href="#">À propos</a></li><li><a href="#">Mentions légales</a></li><li><a href="#">Confidentialité</a></li><li><a href="#">Contact</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <p>© @DateTime.Now.Year SignalCam — République du Cameroun <span class="camflag"><span class="flag-s g"></span><span class="flag-s r"></span><span class="flag-s y"></span></span></p>
+            <p>Données hébergées au Cameroun · <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none">Politique cookies</a></p>
+        </div>
+    </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-text">
+        <div class="cookie-icon">🍪</div>
+        <div class="cookie-msg">
+            <h4>Ce site utilise des cookies</h4>
+            <p>Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic. En continuant, vous acceptez notre <a href="#">politique de confidentialité</a>.</p>
+        </div>
+    </div>
+    <div class="cookie-actions">
+        <button class="btn-cookie-r" onclick="closeBanner()">Refuser</button>
+        <button class="btn-cookie-a" onclick="closeBanner()">Accepter tout</button>
+    </div>
+</div> 
+<script>
+    function closeBanner() {
+        const b = document.getElementById('cookieBanner');
+        if (b) {
+            b.style.transition = 'transform .4s ease';
+            b.style.transform = 'translateY(110%)';
+            setTimeout(() => b.remove(), 420);
+        }
+    }
+
+    // Gestion du bouton accepter avec appel AJAX
+    document.querySelector('.btn-cookie-a')?.addEventListener('click', function() {
+        fetch('@Url.Action("AcceptCookies", "Home")', { method: 'POST' })
+            .then(() => closeBanner());
+    });
+
+    document.querySelector('.btn-cookie-r')?.addEventListener('click', function() {
+        closeBanner();
+    });
+</script>
