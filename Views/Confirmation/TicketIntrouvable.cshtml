@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Ticket introuvable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/Content/confirmation.css")" />
+
+<div class="ticket-not-found">
+    <h2>Ticket introuvable</h2>
+    <p>Le numéro de ticket demandé est invalide ou n'existe pas.</p>
+    <a href="@Url.Action("Index", "Home")">Retour à l'accueil</a>
+</div>

@@ -1,0 +1,255 @@
+﻿@model CyberTrack.Models.ViewModels.ConfirmationViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impression — Reçu de signalement @Model.TicketNumber — @Model.PlateformeName</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/confirmation.css")" />
+</head>
+<body class="print-body">
+
+    <div class="print-toolbar">
+        <div class="toolbar-title">Aperçu avant impression — @Model.TicketNumber</div>
+        <div class="toolbar-right">
+            <a href="@Url.Action("Index", "Confirmation")" class="ct-btn-sm ct-btn-outline">← Retour</a>
+            <button class="ct-btn-sm ct-btn-primary" onclick="window.print()">🖨 Imprimer / PDF</button>
+        </div>
+    </div>
+
+    <div class="doc-wrap">
+        <div class="doc-page">
+
+            <div class="doc-header">
+                <div class="doc-logo-row">
+                    <div>
+                        <div class="doc-logo-text">
+                            <div class="name">@Model.PlateformeName</div>
+                            <div class="sub">Plateforme Nationale de Signalement</div>
+                        </div>
+                    </div>
+
+                    <div class="doc-official">
+                        <div>République du Cameroun</div>
+                        <div>Paix — Travail — Patrie</div>
+                        <div style="margin-top:4px">@Model.SiteWeb</div>
+                    </div>
+                </div>
+
+                <div class="doc-title-row">
+                    <div class="doc-title-text">
+                        <h1>Accusé de Réception</h1>
+                        <p>Confirmation officielle de signalement enregistré</p>
+                    </div>
+
+                    <div class="doc-qr">📱</div>
+                </div>
+            </div>
+
+            <div class="ticket-band">
+                <div class="ticket-band-left">
+                    <div class="tbl">Numéro de ticket</div>
+                    <div class="tbv">@Model.TicketNumber</div>
+                </div>
+
+                <div>
+                    <div class="status-pill"><span class="status-dot"></span>En cours de traitement</div>
+                </div>
+
+                <div class="ticket-band-right">
+                    <div class="tbl">Date de soumission</div>
+                    <div class="tbv">@Model.DateSignalement.ToString("dd MMMM yyyy — HH'h'mm")</div>
+                </div>
+            </div>
+
+            <div class="doc-body">
+
+                <div class="section-title">📋 Informations du signalement</div>
+                <div class="print-info-grid">
+                    <div>
+                        <div class="if-label">Réf. interne</div>
+                        <div class="if-value highlight">@Model.ReferenceInterne</div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">Catégorie</div>
+                        <div class="if-value">
+                            <span class="print-badge fraude">💰 @Model.Categorie</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">Région signalée</div>
+                        <div class="if-value">@Model.Region</div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">Niveau d'urgence</div>
+                        <div class="if-value">
+                            <span class="print-badge urgent">🟡 @Model.NiveauUrgence</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">URL signalée</div>
+                        <div class="if-value" style="word-break:break-all;font-size:13px">@Model.Url</div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">Délai de traitement</div>
+                        <div class="if-value">@Model.DelaiTraitement</div>
+                    </div>
+                </div>
+
+                <div class="section-title">📝 Objet du signalement</div>
+                <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:16px">
+                    @Model.ObjetSignalement
+                </div>
+
+                <div class="section-title">📄 Description fournie</div>
+                <div class="desc-box">
+                    @Model.Description
+                </div>
+
+                <div class="section-title">📎 Pièces jointes fournies</div>
+                <div class="attachments-row">
+                    @if (!string.IsNullOrWhiteSpace(Model.PieceJointe1))
+                    {
+                        <div class="attachment-pill">🖼️ @Model.PieceJointe1</div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.PieceJointe2))
+                    {
+                        <div class="attachment-pill">📄 @Model.PieceJointe2</div>
+                    }
+
+                    @if (string.IsNullOrWhiteSpace(Model.PieceJointe1) && string.IsNullOrWhiteSpace(Model.PieceJointe2))
+                    {
+                        <div class="attachment-pill">Aucune pièce jointe</div>
+                    }
+                </div>
+
+                <div class="section-title">👤 Informations du déclarant</div>
+                <div class="print-info-grid">
+                    <div>
+                        <div class="if-label">Nom</div>
+                        <div class="if-value">@Model.NomDeclarant</div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">E-mail de contact</div>
+                        <div class="if-value">@Model.Email</div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">Mode de déclaration</div>
+                        <div class="if-value">@Model.ModeDeclaration</div>
+                    </div>
+
+                    <div>
+                        <div class="if-label">Adresse IP</div>
+                        <div class="if-value" style="color:var(--gray)">@Model.AdresseIP</div>
+                    </div>
+                </div>
+
+                <div class="section-title">🔄 Suivi de traitement</div>
+                <div class="timeline">
+                    <div class="tl-row-print">
+                        <div class="tl-icon done">✅</div>
+                        <div class="tl-content">
+                            <div class="tl-title-print">Signalement reçu</div>
+                            <div class="tl-subtitle">Votre signalement a été reçu et enregistré dans notre système</div>
+                        </div>
+                        <div class="tl-time">@Model.DateSignalement.ToString("dd MMM yyyy HH:mm")</div>
+                    </div>
+
+                    <div class="tl-row-print">
+                        <div class="tl-icon done">✅</div>
+                        <div class="tl-content">
+                            <div class="tl-title-print">Numéro de ticket attribué</div>
+                            <div class="tl-subtitle">@Model.TicketNumber — Priorité urgente définie</div>
+                        </div>
+                        <div class="tl-time">@Model.DateSignalement.ToString("dd MMM yyyy HH:mm")</div>
+                    </div>
+
+                    <div class="tl-row-print">
+                        <div class="tl-icon done">🔍</div>
+                        <div class="tl-content">
+                            <div class="tl-title-print">Analyse en cours</div>
+                            <div class="tl-subtitle">Examen par l'équipe technique CyberTrack</div>
+                        </div>
+                        <div class="tl-time">En cours</div>
+                    </div>
+
+                    <div class="tl-row-print">
+                        <div class="tl-icon pending">⏳</div>
+                        <div class="tl-content">
+                            <div class="tl-title-print pending">Transmission aux autorités</div>
+                            <div class="tl-subtitle">Transfert vers les services compétents si nécessaire</div>
+                        </div>
+                        <div class="tl-time" style="color:var(--border)">—</div>
+                    </div>
+
+                    <div class="tl-row-print">
+                        <div class="tl-icon pending">🏁</div>
+                        <div class="tl-content">
+                            <div class="tl-title-print pending">Clôture du dossier</div>
+                            <div class="tl-subtitle">Notification par e-mail envoyée au déclarant</div>
+                        </div>
+                        <div class="tl-time" style="color:var(--border)">—</div>
+                    </div>
+                </div>
+
+                <div class="legal-box">
+                    <p>
+                        <strong>📜 Attestation légale :</strong>
+                        Le déclarant atteste sur l'honneur que les informations fournies sont exactes et sincères.
+                        Toute fausse déclaration est passible de poursuites judiciaires conformément aux textes en vigueur
+                        sur la cybersécurité et la cybercriminalité au Cameroun.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="cut-line" />
+            <p class="cut-label">✂ Conserver le talon ci-dessous</p>
+
+            <div class="stub">
+                <div>
+                    <div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">
+                        Numéro de ticket à conserver
+                    </div>
+                    <div class="stub-ticket">@Model.TicketNumber</div>
+                </div>
+
+                <div style="text-align:center">
+                    <div style="font-size:11px;color:var(--gray);margin-bottom:3px">Suivi en ligne</div>
+                    <div style="font-size:13px;font-weight:600;color:var(--green)">@Model.SiteWeb</div>
+                </div>
+
+                <div style="text-align:right">
+                    <div style="font-size:11px;color:var(--gray);margin-bottom:3px">Support</div>
+                    <div style="font-size:13px;font-weight:600;color:var(--ink)">@Model.SupportPhone</div>
+                </div>
+            </div>
+
+            <div class="doc-footer">
+                <div>
+                    <p><strong>@Model.PlateformeName</strong> — Plateforme Nationale de Signalement du Cameroun</p>
+                    <p>Document généré automatiquement le @DateTime.Now.ToString("dd MMMM yyyy 'à' HH'h'mm")</p>
+                </div>
+
+                <div style="text-align:right">
+                    <p>République du Cameroun</p>
+                    <p>Paix — Travail — Patrie</p>
+                    <p style="margin-top:4px;color:var(--green);font-weight:600">@Model.SiteWeb</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

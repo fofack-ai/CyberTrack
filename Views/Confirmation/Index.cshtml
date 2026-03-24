@@ -1,0 +1,172 @@
+﻿@model CyberTrack.Models.ViewModels.ConfirmationViewModel
+
+@{
+    ViewBag.Title = "Confirmation du signalement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/Content/confirmation.css")" />
+
+<div class="confirm-page-body">
+    <div class="confirm-wrapper">
+
+        <div class="confirm-top-actions">
+            <a href="@Url.Action("Index", "Home")" class="ct-btn-sm ct-btn-outline">← Retour à l'accueil</a>
+            <a href="@Url.Action("Print", "Confirmation", new { ticket = Model.TicketNumber })" class="ct-btn-sm ct-btn-primary">🖨 Imprimer</a>
+        </div>
+
+        <div class="success-circle">
+            <span class="success-check">✅</span>
+        </div>
+
+        <h1 class="confirm-title">Signalement soumis avec succès !</h1>
+        <p class="confirm-sub">
+            Votre signalement a été enregistré et transmis à nos équipes.<br />
+            Conservez précieusement votre numéro de ticket pour suivre l'avancement de votre dossier.
+        </p>
+
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div class="ticket-label">Numéro de ticket</div>
+
+                <div class="ticket-number">
+                    <span id="ticketNum">@Model.TicketNumber</span>
+                    <span class="copy-wrap">
+                        <button class="copy-btn" onclick="copyTicket()" title="Copier">📋</button>
+                        <span class="copy-toast" id="copyToast">Copié !</span>
+                    </span>
+                </div>
+
+                <div class="ticket-date">
+                    Soumis le <strong>@Model.DateSignalement.ToString("dd MMMM yyyy 'à' HH'h'mm")</strong>
+                </div>
+
+                <div class="ticket-badge">🔄 En traitement</div>
+            </div>
+
+            <div class="ticket-separator">
+                <div class="sep-line"></div>
+                <div class="sep-circle">✂</div>
+                <div class="sep-line"></div>
+            </div>
+
+            <div class="ticket-body">
+                <div class="ticket-grid">
+                    <div>
+                        <div class="t-label">Catégorie</div>
+                        <div class="t-value">
+                            <span class="t-badge fraude">💰 @Model.Categorie</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="t-label">Statut</div>
+                        <div class="t-value">
+                            <span class="t-badge processing">🔄 @Model.Statut</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="t-label">Région signalée</div>
+                        <div class="t-value">@Model.Region</div>
+                    </div>
+
+                    <div>
+                        <div class="t-label">Niveau d'urgence</div>
+                        <div class="t-value">🟡 @Model.NiveauUrgence</div>
+                    </div>
+
+                    <div>
+                        <div class="t-label">Réf. interne</div>
+                        <div class="t-value green">@Model.ReferenceInterne</div>
+                    </div>
+
+                    <div>
+                        <div class="t-label">Délai de traitement</div>
+                        <div class="t-value">@Model.DelaiTraitement</div>
+                    </div>
+                </div>
+
+                <div class="ticket-timeline">
+                    <div class="tl-title">📍 Progression du dossier</div>
+
+                    <div class="tl-steps">
+                        <div class="tl-step done">
+                            <div class="tl-dot done">✓</div>
+                            <div class="tl-name done">Reçu</div>
+                        </div>
+
+                        <div class="tl-step done">
+                            <div class="tl-dot done">✓</div>
+                            <div class="tl-name done">Enregistré</div>
+                        </div>
+
+                        <div class="tl-step current">
+                            <div class="tl-dot current">●</div>
+                            <div class="tl-name current">Analyse</div>
+                        </div>
+
+                        <div class="tl-step">
+                            <div class="tl-dot">4</div>
+                            <div class="tl-name">Traitement</div>
+                        </div>
+
+                        <div class="tl-step">
+                            <div class="tl-dot">5</div>
+                            <div class="tl-name">Résolu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box gold">
+                <h4>📧 Notification par e-mail</h4>
+                <p>
+                    Vous recevrez des mises à jour automatiques sur l'avancement de votre dossier
+                    à l'adresse fournie.
+                </p>
+            </div>
+
+            <div class="info-box green">
+                <h4>🔍 Suivi en ligne</h4>
+                <p>Suivez votre dossier à tout moment avec votre numéro de ticket.</p>
+                <div class="code">@Model.TicketNumber</div>
+            </div>
+        </div>
+
+        <div class="action-row">
+            <a href="@Url.Action("Print", "Confirmation", new { ticket = Model.TicketNumber })" class="btn-action outline">
+                🖨 Imprimer la confirmation
+            </a>
+
+            <a href="@Url.Action("Create", "Signalement")" class="btn-action outline">
+                ➕ Nouveau signalement
+            </a>
+
+            <a href="@Url.Action("Index", "Home")" class="btn-action primary">
+                🏠 Retour à l'accueil
+            </a>
+        </div>
+
+        <p class="confirm-support">
+            En cas de question, contactez-nous :
+            <a href="mailto:@Model.SupportEmail">@Model.SupportEmail</a>
+            · <strong>@Model.SupportPhone</strong>
+        </p>
+    </div>
+</div>
+
+<script>
+    function copyTicket() {
+        const txt = document.getElementById('ticketNum').textContent;
+        navigator.clipboard.writeText(txt).catch(function () { });
+
+        const t = document.getElementById('copyToast');
+        t.classList.add('show');
+        setTimeout(function () {
+            t.classList.remove('show');
+        }, 2000);
+    }
+</script>
