@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CyberTrack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CyberTrack.css")" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    @RenderBody()
+
+    <script>
+        function closeBanner() {
+            const b = document.getElementById('cookieBanner');
+            if (b) {
+                b.style.transition = 'transform .4s ease';
+                b.style.transform = 'translateY(110%)';
+                setTimeout(() => b.remove(), 420);
+            }
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
